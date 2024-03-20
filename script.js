@@ -221,7 +221,13 @@ function getUserCoordinates(){
         }).catch(() => {
             alert("Failed to fetch User Coordinates!");
         });
+    }, error => {
+        if(error.code === error.PERMISSION_DENIED){
+            alert("Geolocation permission denied. Please reset location permission to grant access again!");
+        }
     });
 }
 searchBtn.addEventListener('click', getCityCoordinates);
 locationBtn.addEventListener('click', getUserCoordinates);
+cityInput.addEventListener('keyup', e => e.key === 'Enter' && getCityCoordinates());
+window.addEventListener('load', getUserCoordinates());
